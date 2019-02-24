@@ -25,7 +25,7 @@
     select 
     <include refid="Base_Column_List" />
     from mmall_product
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and status = 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mmall_product
@@ -176,4 +176,23 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectList" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from mmall_product
+      ORDER BY id asc
+    </select>
+  <select id="selectByNameAndProductId" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from mmall_product
+      <where>
+        <if test="productName != null and productName != ''">
+         and name like #{productName}
+        </if>
+        <if test="productId != null">
+         and id =#{productId}
+        </if>
+      </where>
+  </select>
 </mapper>
