@@ -122,4 +122,15 @@
     from mmall_cart
      where user_id = #{userId} and product_id = #{productId}
   </select>
+  
+  <select id="selectCartByUserId" parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mmall_cart
+    where user_id = #{userid}
+  </select>
+
+  <select id="selectCartProductCheckedStatusByUserId" parameterType="int">
+    select count(1) from mmall_cart where checked=0 and userId=#{userid}
+  </select>
 </mapper>
