@@ -36,7 +36,6 @@ public class CartServiceImpl implements ICartService {
             cart.setProductId(productId);
             cart.setUserId(userId);
             cart.setQuantity(count);
-            cartMapper.insert(cart);
         }else {
             //产品已经在购物车里面了
             count = cart.getQuantity()+count;
@@ -48,18 +47,23 @@ public class CartServiceImpl implements ICartService {
     }
 
     //对购物车变动的项目进行检查
-    private Cart getLimitedCart(Cart cart){
-        int productId = cart.getProductId();
-        Product product = productMapper.selectByPrimaryKey(productId);
-        int stock = product.getStock();
-        if (cart.getQuantity()>stock){
-            cart.setQuantity(stock);
-        }
-        return null;
-    }
+//    private Cart getLimitedCart(Cart cart){
+//        int productId = cart.getProductId();
+//        Product product = productMapper.selectByPrimaryKey(productId);
+//        int stock = product.getStock();
+//        if (cart.getQuantity()>stock){
+//            cart.setQuantity(stock);
+//        }else {
+//
+//        }
+//        return null;
+//    }
     //组装一个CartProductVo
     private CartProductVo assambleCartProductVo(Cart cart){
-        //
+        Product product = null;
+        CartProductVo cartProductVo = new CartProductVo();
+        cartProductVo.setId(cart.getId());
+        cartProductVo.setProductId(cart.getProductId());
         return null;
     }
     //组装一个Cart4
