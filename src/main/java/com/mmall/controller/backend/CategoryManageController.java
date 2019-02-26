@@ -86,7 +86,7 @@ public class CategoryManageController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录");
         }
         if (user.getRole().intValue()==Const.Role.ROLE_ADMIN){
-            return iCategoryService.getDeepCategpry(categoryId);
+            return iCategoryService.getDeepCategory(categoryId);
         }
         return ServerResponse.createByError("无权限操作，需要管理员权限");
     }

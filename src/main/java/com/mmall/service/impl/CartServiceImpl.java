@@ -1,5 +1,6 @@
 package com.mmall.service.impl;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.mmall.common.Const;
 import com.mmall.dao.CartMapper;
@@ -13,6 +14,7 @@ import com.mmall.vo.CartProductVo;
 import com.mmall.vo.CartVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -54,13 +56,44 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public CartVo updateProduct(Integer userId,Integer productId,Integer count){
+    public CartVo updateProduct(Integer userId, Integer productId, Integer count){
         Cart cart = cartMapper.selectByUserIdAndProductId(userId,productId);
         if (cart==null) {
             return null;
         }
         cart.setQuantity(count);
+        cartMapper.updateByPrimaryKeySelective(cart);
         return listAllCart(userId);
+    }
+
+    @Override
+    public CartVo deleteProduct(Integer userId, String productIds){
+        List<String> productList = Splitter.on(",").splitToList(productIds);
+        if (CollectionUtils.isEmpty(productList)){
+            return null;
+        }
+        cartMapper.deleteCartByUSerIdAndProductIds(userId,productList);
+        return listAllCart(userId);
+    }
+
+    @Override
+    public CartVo listCart(Integer userId){
+        return listAllCart(userId);
+    }
+
+
+    @Override
+    public CartVo selectOrUnSelect(Integer userId, Integer productID, Integer checkedStatus){
+        cartMapper.checkedOrUncheckdeProduct(userId,productID,checkedStatus);
+        return listAllCart(userId);
+    }
+
+    @Override
+    public int getCartProductCount(Integer userId){
+        if (userId==null){
+            return 0;
+        }
+        return cartMapper.selectCartProductCount(userId);
     }
 
     /**
