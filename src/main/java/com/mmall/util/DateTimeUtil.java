@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
+ * 使用JodaTime来保证线程安全
  * @author Maoxin
  * @date 2/12/2019
  */

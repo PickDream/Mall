@@ -51,6 +51,9 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ServerResponse<String> register(User user) {
         //用户名是否存在
+        if (user.getUsername()==null){
+            return ServerResponse.createByError("输入参数不符合要求！");
+        }
         ServerResponse<String> responseBody = checkValid(user.getUsername(),Const.USER_NAME);
         if (!responseBody.isSuccess()){
             return ServerResponse.createByError("用户名已经存在");
@@ -71,6 +74,10 @@ public class UserServiceImpl implements IUserService {
 
     }
 
+    /**
+     * @str 待校验字符串
+     * @type 校验的类型
+     * 返回错误类型的都表示已经存在*/
     @Override
     public ServerResponse<String> checkValid(String str, String type) {
         if (StringUtils.isNotBlank(type)){
@@ -83,7 +90,7 @@ public class UserServiceImpl implements IUserService {
             if (Const.EMAIL.equals(type)){
                 int resultCount = userMapper.checkEmail(str);
                 if (resultCount>0){
-                    return ServerResponse.createByError("右键已经注册过了");
+                    return ServerResponse.createByError("邮件已经注册过了");
                 }
             }
         }else {
@@ -105,7 +112,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ServerResponse<String> forgetGetAnswer(String username) {
         ServerResponse<String> validResponse = checkValid(username,Const.USER_NAME);
-        if (!validResponse.isSuccess()){
+        //如果validResponse.isSuccess == true
+        if (validResponse.isSuccess()){
             return ServerResponse.createByError("用户不存在");
         }
         String question = userMapper.selectQuestionByName(username);
@@ -122,23 +130,23 @@ public class UserServiceImpl implements IUserService {
             String forgetToken = UUID.randomUUID().toString();
             //将其设置到Guava本地缓存当中
             TokenCache.setKey(TokenCache.TOKEN_PREFIX+username,forgetToken);
-            ServerResponse.createBySuccess(forgetToken);
+            return ServerResponse.createBySuccess(forgetToken);
         }
         return ServerResponse.createByError("问题答案错误");
     }
 
     @Override
     public ServerResponse<String> setNewPassword(String username, String newPassword, String token) {
-        if (StringUtils.isNotBlank(token)){
+        if (StringUtils.isBlank(token)){
             return ServerResponse.createByError("参数错误，token需要传递");
         }
         ServerResponse validResponse = this.checkValid(username,Const.USER_NAME);
-        if (!validResponse.isSuccess()){
+        if (validResponse.isSuccess()){
             return ServerResponse.createByError("用户不存在");
         }
         //验证token
         String savedToken = TokenCache.getKey(TokenCache.TOKEN_PREFIX+username);
-        if (StringUtils.isBlank(token)){
+        if (StringUtils.isBlank(savedToken)){
             return ServerResponse.createByError("token无效或者已经失效");
         }
         if (StringUtils.equals(savedToken,token)){
@@ -148,7 +156,7 @@ public class UserServiceImpl implements IUserService {
                 return ServerResponse.createBySuccess("修改密码成功");
             }
         }else {
-            return ServerResponse.createByError("token错误,请重新获取");
+            return ServerResponse.createByError("token错误,请重新获 取");
         }
 
         return ServerResponse.createByError("修改密码失败");
