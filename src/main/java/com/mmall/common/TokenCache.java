@@ -44,7 +44,7 @@ public class TokenCache {
             e.printStackTrace();
             logger.error("localCache get error",e);
         }
-        return null;
+        return value;
     }
 
 }
