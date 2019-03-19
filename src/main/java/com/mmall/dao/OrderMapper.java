@@ -23,4 +23,7 @@ public interface OrderMapper {
                                              @Param("userId") Integer userId);
     Order selectByOrderNo(Long orderNo);
 
+    List<Order> selectByUserId(Integer userId);
+
+    List<Order> selectAllOrder();
 }

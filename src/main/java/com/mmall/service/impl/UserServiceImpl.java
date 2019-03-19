@@ -71,7 +71,6 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByError("注册失败");
         }
         return ServerResponse.createBySuccessMessage("注册成功");
-
     }
 
     /**
