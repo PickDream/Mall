@@ -52,17 +52,20 @@ public class CategoryManageController {
     @RequestMapping("set_category_name.do")
     public ServerResponse<String> modifyCategory(HttpSession session
             ,@RequestParam(value = "categoryId",defaultValue = "0") Integer categrayId
-            ,String categrayName){
+            ,String categoryName){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (Objects.isNull(user)){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
         }
         if (user.getRole().intValue()==Const.Role.ROLE_ADMIN){
-            return iCategoryService.setCategory(categrayId,categrayName);
+            return iCategoryService.updateCategoryName(categrayId,categoryName);
         }
         return ServerResponse.createByError("无权限操作，需要管理员权限");
     }
 
+    /**
+     * 注意，获取类别传入的是品类的父节点，对于根节点是0
+     * */
     @ResponseBody
     @RequestMapping("get_category.do")
     public ServerResponse<List<Category>> getChildrenparallelCategory(HttpSession session
@@ -86,7 +89,7 @@ public class CategoryManageController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录");
         }
         if (user.getRole().intValue()==Const.Role.ROLE_ADMIN){
-            return iCategoryService.getDeepCategory(categoryId);
+            return iCategoryService.selectCategoryAndChildrenById(categoryId);
         }
         return ServerResponse.createByError("无权限操作，需要管理员权限");
     }

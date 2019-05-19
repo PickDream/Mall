@@ -34,10 +34,10 @@ public class OrderManageController {
 
 
     @ResponseBody
-    @RequestMapping("detail.do")
+    @RequestMapping("list.do")
     public ServerResponse<PageInfo> orderList(HttpSession session,
                                               @RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                                              @RequestParam(value = "pageSize",defaultValue = "pageSize")int pageSize){
+                                              @RequestParam(value = "pageSize",defaultValue = "10")int pageSize){
         //校验用户是否登录
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (Objects.isNull(user)){
@@ -67,7 +67,7 @@ public class OrderManageController {
     @RequestMapping("search.do")
     public ServerResponse searchOrder(HttpSession session,Long orderNo,
                                       @RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                                      @RequestParam(value = "pageSize",defaultValue = "pageSize")int pageSize){
+                                      @RequestParam(value = "pageSize",defaultValue = "10")int pageSize){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (Objects.isNull(user)){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");

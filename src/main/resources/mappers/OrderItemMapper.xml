@@ -164,7 +164,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectOrderItemsByOrderNoAndUserId" parameterType="long" resultMap="BaseResultMap">
+  <select id="selectOrderItemsByOrderNoAndUserId" parameterType="map" resultMap="BaseResultMap">
       select
       <include refid="Base_Column_List"/>
       from
@@ -184,7 +184,7 @@
     </foreach>
   </insert>
 
-  <select id="selectByOrderNo" parameterType="int" resultMap="BaseResultMap">
+  <select id="selectByOrderNo" parameterType="long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from

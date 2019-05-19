@@ -1,6 +1,9 @@
 package com.mmall.common;
 
+import com.google.common.collect.Sets;
 import com.mmall.pojo.Product;
+
+import java.util.Set;
 
 /**
  * 常量类，用于维护分布在其他位置的常量
@@ -14,6 +17,9 @@ public class Const {
     public interface Role{
         int ROLE_CUSTOMER = 0;
         int ROLE_ADMIN = 1;
+    }
+    public interface ProductListOrderBy{
+        Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
     }
     //代指商品是否已经被选中
     public interface Cart{

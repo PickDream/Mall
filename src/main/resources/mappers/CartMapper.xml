@@ -113,7 +113,7 @@
       quantity = #{quantity,jdbcType=INTEGER},
       checked = #{checked,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = now();
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByUserIdAndProductId" parameterType="map" resultMap="BaseResultMap">
@@ -137,7 +137,9 @@
   <delete id="deleteCartByUSerIdAndProductIds" parameterType="map">
     delete from mmall_cart
     where user_id = #{userid}
+
     <if test="productIdList != null">
+      and product_id in
       <foreach collection="productIdList" item="item" index="index" open="(" close=")" separator=",">
         #{item}
       </foreach>
@@ -159,6 +161,6 @@
     select
     <include refid="Base_Column_List"/>
     from mmall_cart
-    where id=#{userid} and checked = 1
+    where user_id=#{userid} and checked = 1
   </select>
 </mapper>

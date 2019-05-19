@@ -187,4 +187,10 @@
   <select id="checkEmailNotForUserId" parameterType="map" resultType="int">
     select count(1) from mmall_user where email = #{email} and id!=#{id}
   </select>
+
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+   from mmall_user
+  </select>
 </mapper>

@@ -7,6 +7,8 @@ import com.google.common.collect.Maps;
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
+import com.mmall.dao.OrderMapper;
+import com.mmall.pojo.Order;
 import com.mmall.pojo.User;
 import com.mmall.service.IOrderService;
 import com.mmall.service.IShipingService;
@@ -38,9 +40,11 @@ public class OrderController {
     IOrderService iOrderService;
     @Autowired
     IShipingService iShipingService;
+    @Autowired
+    OrderMapper orderMapper;
 
     @ResponseBody
-    @RequestMapping
+    @RequestMapping("create.do")
     public ServerResponse createOrder(HttpSession session,Integer shippingId){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user==null){
@@ -50,17 +54,19 @@ public class OrderController {
     }
     /**
      * 支付接口
-     * @param orderId 订单号;
+     * @param orderNo 订单号;
      * */
     @ResponseBody
     @RequestMapping("pay.do")
-    public ServerResponse pay(HttpSession session, Long orderId, HttpServletRequest request){
+    public ServerResponse pay(HttpSession session, Long orderNo, HttpServletRequest request){
+
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
         }
+        //获取服务真实的路径
         String path = request.getSession().getServletContext().getRealPath("upload");
-        return iOrderService.pay(orderId,user.getId(),path);
+        return iOrderService.pay(orderNo,user.getId(),path);
     }
 
     @ResponseBody

@@ -21,7 +21,7 @@ public interface ICategoryService {
      * @param categoryName String
      * @return String
      * */
-    ServerResponse<String> setCategory(Integer categoryId, String categoryName);
+    ServerResponse<String> updateCategoryName(Integer categoryId, String categoryName);
 
     /**
      * 获取产品类别子节点(平级)
@@ -30,10 +30,6 @@ public interface ICategoryService {
      */
     ServerResponse<List<Category>> getChildrenParallelCategory(Integer categoryId);
 
-    /**
-     * 获取当前分类id及递归子节点categoryId
-     * @param categoryId Integer
-     * @return List<Category>
-     */
-    ServerResponse<List<Category>> getDeepCategory(Integer categoryId);
+    ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId);
+
 }
