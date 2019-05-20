@@ -1,21 +1,13 @@
 # Mall
-专业设计准备项目，基于SSM的商城项目
+专业设计准备项目，基于SSM的商城项目(v2.0版本)
 ## 目的
-在这个项目中学习练习一些必备的东西
-### 工具方面
-+ Git
-+ Spring
-+ MyBatis
-+ SpringMVC
-+ Nginx
-+ FTPServer的搭建
-+ Maven
-### 规划
-+ 当前分支v1.0完成基本功能
-+ v2.0 分支将会将该项目改进并分布式部署，并使用
-    + Redis
-    + Spring Schedule
-    + Spring Session
-    
+在前一个的基础之上完成对
++ Tomcat集群的配置
++ 应用Redis，使用Jedis完成单点登录
++ Redis分布式
++ 使用SpringSession完成分布式Session
++ 接口转为Restful风格
++ 使用分布式锁
+
 
 
