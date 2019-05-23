@@ -24,7 +24,6 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/manage/category")
 public class CategoryManageController {
-
     @Autowired
     IUserService iUserService;
 

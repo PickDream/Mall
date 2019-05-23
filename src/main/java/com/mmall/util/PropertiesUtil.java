@@ -30,10 +30,14 @@ public class PropertiesUtil {
     }
 
     public static String getProperty(String key,String defaultValue){
-        String value = props.getProperty(key.trim());
+        String value = getProperty(key);
         if (StringUtils.isBlank(value)){
             value = defaultValue;
         }
         return value.trim();
+    }
+
+    public static String getProperty(String key){
+        return props.getProperty(key.trim());
     }
 }
