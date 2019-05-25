@@ -28,6 +28,9 @@ public class Const {
         String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";
         String LIMIT_NUM_SUCCESS="LIMIT_NUM_SUCCESS";
     }
+    public interface RedisCacheConfig{
+        int REDIS_SESSION_EXTIME = 60*30;
+    }
 
     public enum ProductStatusEnum{
         ON_SALE(1,"在线");

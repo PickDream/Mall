@@ -24,6 +24,16 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <!--SessionExpire Filter-->
+  <filter>
+    <filter-name>SessionExpireFilter</filter-name>
+    <filter-class>com.mmall.controller.common.SessionExpireFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SessionExpireFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
