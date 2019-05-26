@@ -9,6 +9,7 @@ import com.mmall.dao.UserMapper;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
 import com.mmall.util.MD5Util;
+import com.mmall.util.RedisPoolUtil;
 import net.sf.jsqlparser.schema.Server;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,7 +153,8 @@ public class UserServiceImpl implements IUserService {
         if (resultCount>0){
             String forgetToken = UUID.randomUUID().toString();
             //将其设置到Guava本地缓存当中
-            TokenCache.setKey(TokenCache.TOKEN_PREFIX+username,forgetToken);
+            //TokenCache.setKey(TokenCache.TOKEN_PREFIX+username,forgetToken);
+            RedisPoolUtil.setEx(Const.TOKEN_PREFIX+username,forgetToken,60*60*12);
             return ServerResponse.createBySuccess(forgetToken);
         }
         return ServerResponse.createByError("问题答案错误");
@@ -163,7 +165,7 @@ public class UserServiceImpl implements IUserService {
      * */
     @Override
     public ServerResponse<String> setNewPassword(String username, String newPassword, String token) {
-        String TokenKey = TokenCache.TOKEN_PREFIX+username;
+        String TokenKey = Const.TOKEN_PREFIX+username;
         if (StringUtils.isBlank(token)){
             return ServerResponse.createByError("参数错误，token需要传递");
         }
@@ -172,7 +174,8 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByError("用户不存在");
         }
         //验证token
-        String savedToken = TokenCache.getKey(TokenKey);
+        //String savedToken = TokenCache.getKey(TokenKey);
+        String savedToken = RedisPoolUtil.get(TokenKey);
         if (StringUtils.isBlank(savedToken)){
             return ServerResponse.createByError("token无效或者已经失效");
         }
@@ -180,7 +183,8 @@ public class UserServiceImpl implements IUserService {
             String md5Password = MD5Util.MD5EncodeUtf8(newPassword);
             int rowCount = userMapper.updatePasswordByUsername(username,md5Password);
             if (rowCount>0){
-                TokenCache.invalidCache(TokenKey);
+                //TokenCache.invalidCache(TokenKey);
+                RedisPoolUtil.del(TokenKey);
                 return ServerResponse.createBySuccess("修改密码成功");
             }
         }else {

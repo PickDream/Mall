@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <!--导入属性配置-->
-    <properties resource="datasource.properties"></properties>
+    <properties resource="datasource.properties"/>
 
     <!--指定特定数据库的jdbc驱动jar包的位置-->
     <classPathEntry location="${db.driverLocation}"/>
