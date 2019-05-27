@@ -11,4 +11,6 @@
 
     <!--引入dataSourcepackage-->
     <import resource="application-datasource.xml"/>
+    <!--引入applicationContext-->
+    <import resource="applicationContext-spring-session.xml"/>
 </beans>
