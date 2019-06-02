@@ -1,0 +1,1663 @@
+{
+	"info": {
+		"name": "Mall",
+		"_postman_id": "878cec5c-44fa-40f5-9f01-786404a9caff",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "门户_用户接口",
+			"description": null,
+			"item": [
+				{
+					"name": "登录",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/login.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"login.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "注册",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/register.do?username=maoxin&password=maoxin&email=maoxin@maoxin.com&phone=13813131313&question=no&answer=yes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"register.do"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "maoxin",
+									"equals": true
+								},
+								{
+									"key": "password",
+									"value": "maoxin",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "maoxin@maoxin.com",
+									"equals": true
+								},
+								{
+									"key": "phone",
+									"value": "13813131313",
+									"equals": true
+								},
+								{
+									"key": "question",
+									"value": "no",
+									"equals": true
+								},
+								{
+									"key": "answer",
+									"value": "yes",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "检查参数是否有效",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/check_valid.do?str=admin&type=username",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"check_valid.do"
+							],
+							"query": [
+								{
+									"key": "str",
+									"value": "admin",
+									"equals": true
+								},
+								{
+									"key": "type",
+									"value": "username",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取登录用户信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/get_user_info.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"get_user_info.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "忘记密码",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/forget_get_question.do?username=admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"forget_get_question.do"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "提交修改密码问题答案",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/forget_check_answer.do?username=admin&question=问题&answer=答案",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"forget_check_answer.do"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin",
+									"equals": true
+								},
+								{
+									"key": "question",
+									"value": "问题",
+									"equals": true
+								},
+								{
+									"key": "answer",
+									"value": "答案",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "重置密码",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/forget_reset_password.do?username=admin&passwordNew=admin&forgetToken=5fc15fda-cd10-4240-8504-09543bfa74e1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"forget_reset_password.do"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin",
+									"equals": true
+								},
+								{
+									"key": "passwordNew",
+									"value": "admin",
+									"equals": true
+								},
+								{
+									"key": "forgetToken",
+									"value": "5fc15fda-cd10-4240-8504-09543bfa74e1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "登录状态下修改密码",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/reset_password.do?oldPassword=admin&newPassword=admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"reset_password.do"
+							],
+							"query": [
+								{
+									"key": "oldPassword",
+									"value": "admin",
+									"equals": true
+								},
+								{
+									"key": "newPassword",
+									"value": "admin",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "登录状态下修改个人信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/update_information.do?email=maoxin@aliyun.com&phone=12212121&question=Question&answer=Answer",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"update_information.do"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "maoxin@aliyun.com",
+									"equals": true
+								},
+								{
+									"key": "phone",
+									"value": "12212121",
+									"equals": true
+								},
+								{
+									"key": "question",
+									"value": "Question",
+									"equals": true
+								},
+								{
+									"key": "answer",
+									"value": "Answer",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取当前登录用户的详细信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/get_information.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"get_information.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "退出登录",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/user/logout.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"logout.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "门户-产品接口",
+			"description": "",
+			"item": [
+				{
+					"name": "产品搜索及动态排序List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/product/list.do?pageNum=1&pageSize=1&keyword=&categoryId=100001",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"product",
+								"list.do"
+							],
+							"query": [
+								{
+									"key": "pageNum",
+									"value": "1",
+									"equals": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1",
+									"equals": true
+								},
+								{
+									"key": "orderBy",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "categoryId",
+									"value": "100001",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取产品细节",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/product/detail.do?productId=26",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"product",
+								"detail.do"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "26",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "门户-购物车接口",
+			"description": "",
+			"item": [
+				{
+					"name": "购物车List列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/list.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"list.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "购物车添加商品",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/add.do?productId=27&count=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"add.do"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "27",
+									"equals": true
+								},
+								{
+									"key": "count",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "更新购物车某个产品数量",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/update.do?productId=27&count=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"update.do"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "27",
+									"equals": true
+								},
+								{
+									"key": "count",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "移除购物车某个产品",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/delete_product.do?productIds=26",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"delete_product.do"
+							],
+							"query": [
+								{
+									"key": "productIds",
+									"value": "26",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "购物车选中某个商品",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/select.do?productId=27",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"select.do"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "27",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "购物车取消选中某个商品",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/un_select.do?productId=27",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"un_select.do"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "27",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "得到商品的件数",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/get_cart_product_count.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"get_cart_product_count.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "购物车全选",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/select_all.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"select_all.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "购物车取消全选",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/cart/un_select_all.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cart",
+								"un_select_all.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "门户-订单接口",
+			"description": "",
+			"item": [
+				{
+					"name": "创建订单",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/order/create.do?shippingId=29",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"create.do"
+							],
+							"query": [
+								{
+									"key": "shippingId",
+									"value": "29",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取订单的商品信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/order/get_order_cart_product.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"get_order_cart_product.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "订单List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/order/list.do?pageSize=2&pageNum=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"list.do"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "2",
+									"equals": true
+								},
+								{
+									"key": "pageNum",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取订单详情",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/order/detail.do?orderNo=1558191391465",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"detail.do"
+							],
+							"query": [
+								{
+									"key": "orderNo",
+									"value": "1558191391465",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "取消订单",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/order/cancel.do?orderNo=1558191391465",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"cancel.do"
+							],
+							"query": [
+								{
+									"key": "orderNo",
+									"value": "1558191391465",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "门户-收货地址接口",
+			"description": "",
+			"item": [
+				{
+					"name": "添加地址",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/shipping/add.do?userId&receiverName=Maoxin&receiverPhone=13131&receiverMobile=4612124&receiverProvince=天津&receiverCity=西青区&receiverAddress=大学城&receiverZip=100000&receiverDis",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"shipping",
+								"add.do"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "",
+									"equals": false
+								},
+								{
+									"key": "receiverName",
+									"value": "Maoxin",
+									"equals": true
+								},
+								{
+									"key": "receiverPhone",
+									"value": "13131",
+									"equals": true
+								},
+								{
+									"key": "receiverMobile",
+									"value": "4612124",
+									"equals": true
+								},
+								{
+									"key": "receiverProvince",
+									"value": "天津",
+									"equals": true
+								},
+								{
+									"key": "receiverCity",
+									"value": "西青区",
+									"equals": true
+								},
+								{
+									"key": "receiverAddress",
+									"value": "大学城",
+									"equals": true
+								},
+								{
+									"key": "receiverZip",
+									"value": "100000",
+									"equals": true
+								},
+								{
+									"key": "receiverDis",
+									"value": "",
+									"equals": false
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "删除地址",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/shipping/del.do?shippingId=30",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"shipping",
+								"del.do"
+							],
+							"query": [
+								{
+									"key": "shippingId",
+									"value": "30",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "登录状态更新地址",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/shipping/update.do?id=29&receiverName=Maoxin&receiverPhone=131313&receiverMobile=13820926666&receiverProvince=天津&receiverCity=天津&receiverAddress=西青区大学城&receiverZip=100000",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"shipping",
+								"update.do"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "29",
+									"equals": true
+								},
+								{
+									"key": "receiverName",
+									"value": "Maoxin",
+									"equals": true
+								},
+								{
+									"key": "receiverPhone",
+									"value": "131313",
+									"equals": true
+								},
+								{
+									"key": "receiverMobile",
+									"value": "13820926666",
+									"equals": true
+								},
+								{
+									"key": "receiverProvince",
+									"value": "天津",
+									"equals": true
+								},
+								{
+									"key": "receiverCity",
+									"value": "天津",
+									"equals": true
+								},
+								{
+									"key": "receiverAddress",
+									"value": "西青区大学城",
+									"equals": true
+								},
+								{
+									"key": "receiverZip",
+									"value": "100000",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "选中查看具体的地址",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}shipping/select.do?shippingId=29",
+							"host": [
+								"{{host}}shipping"
+							],
+							"path": [
+								"select.do"
+							],
+							"query": [
+								{
+									"key": "shippingId",
+									"value": "29",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "地址列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/shipping/list.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"shipping",
+								"list.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "门户-支付接口",
+			"description": "",
+			"item": [
+				{
+					"name": "支付请求",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/order/pay.do?orderNo=1558191391465",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"pay.do"
+							],
+							"query": [
+								{
+									"key": "orderNo",
+									"value": "1558191391465",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "查询订单支付状态",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/order/query_order_pay_status.do?orderNo=1558190787045",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"query_order_pay_status.do"
+							],
+							"query": [
+								{
+									"key": "orderNo",
+									"value": "1558190787045",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "支付宝回调接口",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/order/alipay_callback.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"alipay_callback.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "后台-产品接口",
+			"description": "",
+			"item": [
+				{
+					"name": "获取产品List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/product/list.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"product",
+								"list.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "产品搜索",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/product/search.do?productName=Apple",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"product",
+								"search.do"
+							],
+							"query": [
+								{
+									"key": "productName",
+									"value": "Apple",
+									"equals": true
+								}
+							]
+						},
+						"description": "参数列表\nproductName\nproductId\npageNum(default=1)\npageSize(default=10)"
+					},
+					"response": []
+				},
+				{
+					"name": "管理员上传文件",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "upload_file",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/manage/product/upload.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"product",
+								"upload.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取产品详情（rich_test）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/product/detail.do?productId=26",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"product",
+								"detail.do"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "26",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "产品上下架",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/product/set_sale_status.do?productId=26&status=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"product",
+								"set_sale_status.do"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "26",
+									"equals": true
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"equals": true
+								}
+							]
+						},
+						"description": "status 0 下架\nstatus 1 上架\n"
+					},
+					"response": []
+				},
+				{
+					"name": "富文本上传图片",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "upload_file",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/manage/product/richtext_img_upload.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"product",
+								"richtext_img_upload.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "新增或者更新商品",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/product/save.do?categoryId=1&name=三星洗衣机&subtitle=三星大促销&mainImage=561966c7-467b-4f53-acd3-12f175aa30f9.png&subImages=561966c7-467b-4f53-acd3-12f175aa30f9.png&detail=这就是一个简单的测试商品&price=1000&stock=100&status=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"product",
+								"save.do"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "1",
+									"equals": true
+								},
+								{
+									"key": "name",
+									"value": "三星洗衣机",
+									"equals": true
+								},
+								{
+									"key": "subtitle",
+									"value": "三星大促销",
+									"equals": true
+								},
+								{
+									"key": "mainImage",
+									"value": "561966c7-467b-4f53-acd3-12f175aa30f9.png",
+									"equals": true
+								},
+								{
+									"key": "subImages",
+									"value": "561966c7-467b-4f53-acd3-12f175aa30f9.png",
+									"equals": true
+								},
+								{
+									"key": "detail",
+									"value": "这就是一个简单的测试商品",
+									"equals": true
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"equals": true
+								},
+								{
+									"key": "stock",
+									"value": "100",
+									"equals": true
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"equals": true
+								},
+								{
+									"key": "id",
+									"value": "3",
+									"equals": true,
+									"disabled": true
+								}
+							]
+						},
+						"description": "如果传了id自然就是更新\n没有就是新增"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "后台-统计接口",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "后台-用户接口",
+			"description": "",
+			"item": [
+				{
+					"name": "管理员登录",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/user/login.do?username=admin&password=admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"user",
+								"login.do"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin",
+									"equals": true
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "用户列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}manage/user/list.do",
+							"host": [
+								"{{host}}manage"
+							],
+							"path": [
+								"user",
+								"list.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "后台-产品类别接口",
+			"description": "",
+			"item": [
+				{
+					"name": "获取品类子节点",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/category/get_category.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"category",
+								"get_category.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "添加类别",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/category/add_category.do?parentId=100001&categoryName=平板电脑",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"category",
+								"add_category.do"
+							],
+							"query": [
+								{
+									"key": "parentId",
+									"value": "100001",
+									"equals": true
+								},
+								{
+									"key": "categoryName",
+									"value": "平板电脑",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "修改类别名字",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/category/set_category_name.do?categoryId=100031&categoryName=IPAD",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"category",
+								"set_category_name.do"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "100031",
+									"equals": true
+								},
+								{
+									"key": "categoryName",
+									"value": "IPAD",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取当前分类id及递归子节点categoryId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/category/get_deep_category.do?categoryId=100001",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"category",
+								"get_deep_category.do"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "100001",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "后台-订单接口",
+			"description": "",
+			"item": [
+				{
+					"name": "获取订单列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/order/list.do",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"order",
+								"list.do"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "按订单号进行查询",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/order/search.do?orderNo=1558191391465",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"order",
+								"search.do"
+							],
+							"query": [
+								{
+									"key": "orderNo",
+									"value": "1558191391465",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取订单详细信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/order/detail.do?orderNo=1558191391465",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"order",
+								"detail.do"
+							],
+							"query": [
+								{
+									"key": "orderNo",
+									"value": "1558191391465",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "发货操作",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/manage/order/send_goods.do?orderNo=1558191391465",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manage",
+								"order",
+								"send_goods.do"
+							],
+							"query": [
+								{
+									"key": "orderNo",
+									"value": "1558191391465",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

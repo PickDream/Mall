@@ -70,13 +70,13 @@ public class ProductManageController {
 
     @ResponseBody
     @RequestMapping(value = "detail.do")
-    public ServerResponse getDetail(HttpSession session,Integer productID){
+    public ServerResponse getDetail(HttpSession session,Integer productId){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (Objects.isNull(user)){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录");
         }
         if (iUserService.checkAdminRole(user).isSuccess()){
-            return iProductService.getProductDetail(productID);
+            return iProductService.getProductDetail(productId);
         }else {
             return ServerResponse.createByError("无权限访问");
         }

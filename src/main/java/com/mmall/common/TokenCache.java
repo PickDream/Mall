@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
+ *
  * @author Maoxin
  * @ClassName TokenCache
  * @date 1/30/2019
@@ -45,6 +46,10 @@ public class TokenCache {
             logger.error("localCache get error",e);
         }
         return value;
+    }
+    //TODO 设置缓存失效
+    public static void invalidCache(String tokenKey){
+        localCache.invalidate(tokenKey);
     }
 
 }

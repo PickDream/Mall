@@ -20,6 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * 类别管理
  * @author Maoxin
  * @ClassName CategoryServiceImpl
  * @date 2/2/2019
@@ -51,7 +52,7 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public ServerResponse<String> setCategory(Integer categrayId, String categrayName) {
+    public ServerResponse<String> updateCategoryName(Integer categrayId, String categrayName) {
         //注意对参数进行一个判断
         if (categrayId==null||StringUtils.isBlank(categrayName)){
             return ServerResponse.createByError("更新品类参数错误");
@@ -62,13 +63,18 @@ public class CategoryServiceImpl implements ICategoryService {
         category.setName(categrayName);
         int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
         if (rowCount>0){
-            return ServerResponse.createBySuccess("更新品类名字失败");
+            return ServerResponse.createBySuccess("更新品类名字成功");
         }
-        return ServerResponse.createByError("更新品类名字成功");
+        return ServerResponse.createByError("更新品类名字失败");
     }
 
+
+    /**
+     *
+     * */
     @Override
     public ServerResponse<List<Category>> getChildrenParallelCategory(Integer categoryId){
+        //根据ParentId来递归的获取Category的列表
         List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(categoryId);
         if (CollectionUtils.isEmpty(categoryList)){
             logger.info("未找到当前分类的子分类");
@@ -76,9 +82,29 @@ public class CategoryServiceImpl implements ICategoryService {
         return ServerResponse.createBySuccess(categoryList);
     }
 
-
+    /**
+     * 递归查询本节点的id及孩子节点的id
+     * @param categoryId 指明查询节点的Id
+     * */
     @Override
-    public ServerResponse getDeepCategory(Integer categoryId) {
+    public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId) {
+        Set<Category> categorySet = Sets.newHashSet();
+        findChildCategory(categorySet,categoryId);
+
+
+        List<Integer> categoryIdList = Lists.newArrayList();
+        if(categoryId != null){
+            for(Category categoryItem : categorySet){
+                categoryIdList.add(categoryItem.getId());
+            }
+        }
+        return ServerResponse.createBySuccess(categoryIdList);
+    }
+
+    /**
+     *
+     * */
+    private ServerResponse getDeepCategory(Integer categoryId) {
         Set<Category> categorieSet = Sets.newHashSet();
         findChildCategory(categorieSet,categoryId);
         List<Integer> categoryIdList = Lists.newArrayList();

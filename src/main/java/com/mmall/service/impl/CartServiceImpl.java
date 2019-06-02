@@ -106,6 +106,9 @@ public class CartServiceImpl implements ICartService {
         Product product = null;
         product = productMapper.selectByPrimaryKey(cart.getProductId());
         CartProductVo cartProductVo = new CartProductVo();
+
+        cartProductVo.setProductStock(product.getStock());
+        cartProductVo.setUserId(cart.getUserId());
         cartProductVo.setId(cart.getId());
         cartProductVo.setProductId(cart.getProductId());
         cartProductVo.setProductName(product.getName());
@@ -143,13 +146,15 @@ public class CartServiceImpl implements ICartService {
         boolean isAllChecked = true;
         BigDecimal totlePrice=new BigDecimal("0");
         for (CartProductVo cpv:cartProducts){
+            //查看是否都被选中了
             if (cpv.getProductChecked()==Const.Cart.CHECKED){
                 //执行增加BigDecimal的操作
-                totlePrice = BigDecimalUtil.add(totlePrice.doubleValue(),cpv.getProductPrice().doubleValue());
+                totlePrice = BigDecimalUtil.add(totlePrice.doubleValue(),cpv.getProductTotalPrice().doubleValue());
             }else{
                 isAllChecked = false;
             }
         }
+        cartVo.setCartProductVoList(cartProducts);
         cartVo.setAllChecked(isAllChecked);
         cartVo.setCartTotalPrice(totlePrice);
         cartVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.perfix","http://47.93.241.68/"));

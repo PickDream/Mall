@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 /**
+ *
  * @author Maoxin
  * @date 1/28/2019
  */
@@ -42,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "logout.do",method = RequestMethod.GET)
     public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Const.CURRENT_USER);
-        return ServerResponse.createBySuccess();
+        return ServerResponse.createBySuccess("退出成功");
     }
     @ResponseBody
     @RequestMapping(value = "register.do",method = RequestMethod.GET)
@@ -78,6 +79,9 @@ public class UserController {
     public ServerResponse<String> forgetResetPassword(String username,String passwordNew,String forgetToken){
         return iUserService.setNewPassword(username,passwordNew,forgetToken);
     }
+    /**
+     * 该接口只有在登录的情况下才能直接重新设置密码
+     * */
     @ResponseBody
     @RequestMapping(value = "reset_password.do",method = RequestMethod.GET)
     public ServerResponse<String> resetPassword(String oldPassword,String newPassword,HttpSession session){

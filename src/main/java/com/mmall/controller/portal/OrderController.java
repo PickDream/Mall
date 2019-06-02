@@ -7,6 +7,8 @@ import com.google.common.collect.Maps;
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
+import com.mmall.dao.OrderMapper;
+import com.mmall.pojo.Order;
 import com.mmall.pojo.User;
 import com.mmall.service.IOrderService;
 import com.mmall.service.IShipingService;
@@ -15,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,9 +40,11 @@ public class OrderController {
     IOrderService iOrderService;
     @Autowired
     IShipingService iShipingService;
+    @Autowired
+    OrderMapper orderMapper;
 
     @ResponseBody
-    @RequestMapping
+    @RequestMapping("create.do")
     public ServerResponse createOrder(HttpSession session,Integer shippingId){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user==null){
@@ -49,17 +54,19 @@ public class OrderController {
     }
     /**
      * 支付接口
-     * @param orderId 订单号;
+     * @param orderNo 订单号;
      * */
     @ResponseBody
     @RequestMapping("pay.do")
-    public ServerResponse pay(HttpSession session, Long orderId, HttpServletRequest request){
+    public ServerResponse pay(HttpSession session, Long orderNo, HttpServletRequest request){
+
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
         }
+        //获取服务真实的路径
         String path = request.getSession().getServletContext().getRealPath("upload");
-        return iOrderService.pay(orderId,user.getId(),path);
+        return iOrderService.pay(orderNo,user.getId(),path);
     }
 
     @ResponseBody
@@ -106,5 +113,46 @@ public class OrderController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
         return iOrderService.queryOrderStatus(user.getId(),orderNo);
+    }
+
+    @ResponseBody
+    @RequestMapping("cancel.do")
+    public ServerResponse create(HttpSession session, Long orderNo) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (Objects.isNull(user)) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.cancelOrder(user.getId(), orderNo);
+    }
+
+    @ResponseBody
+    @RequestMapping("get_order_cart_product.do")
+    public ServerResponse getOrderCartProduct(HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (Objects.isNull(user)) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.getOrderCartProduct(user.getId());
+    }
+
+    @ResponseBody
+    @RequestMapping("detail.do")
+    public ServerResponse detail(HttpSession session,Long orderNo){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (Objects.isNull(user)) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.getOrderDetail(user.getId(),orderNo);
+    }
+
+    @ResponseBody
+    @RequestMapping("list.do")
+    public ServerResponse list(HttpSession session, @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize,
+                               @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (Objects.isNull(user)) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.list(user.getId(),pageNum,pageSize);
     }
 }
