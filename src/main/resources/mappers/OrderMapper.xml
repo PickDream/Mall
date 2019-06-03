@@ -225,4 +225,18 @@
     <include refid="Base_Column_List"/>
    from mmall_order order by  create_time desc
   </select>
+
+  <select id="getOrderTotal" resultType="int">
+    select count(1) from mmall_order
+  </select>
+
+  <select id="selectOrderStatusByCreateTime" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+   from mmall_order
+   where status = #{status}
+   and create_time
+   <![CDATA[and create_time <= #{data}]]>
+    order by close_time desc
+  </select>
 </mapper>

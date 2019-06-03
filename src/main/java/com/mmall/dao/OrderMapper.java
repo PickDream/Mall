@@ -26,4 +26,10 @@ public interface OrderMapper {
     List<Order> selectByUserId(Integer userId);
 
     List<Order> selectAllOrder();
+
+    int getOrderTotal();
+
+    //
+    List<Order> selectOrderStatusByCreateTime(@Param("status") Integer status,@Param("date")String date);
 }
+

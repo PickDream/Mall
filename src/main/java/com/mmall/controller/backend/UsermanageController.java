@@ -20,6 +20,7 @@ import java.util.Objects;
  * @author Maoxin
  * @date 2/2/2019
  */
+
 @Controller
 @RequestMapping("/manage/user")
 public class UsermanageController {
@@ -27,7 +28,7 @@ public class UsermanageController {
     @Autowired
     IUserService iUserService;
     @ResponseBody
-    @RequestMapping(value = "login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "login.do")
     public ServerResponse<User> adminLoginIn(String username, String password, HttpSession session){
         ServerResponse<User> response = iUserService.login(username,password);
         if (response.isSuccess()){
@@ -47,16 +48,7 @@ public class UsermanageController {
     public ServerResponse<PageInfo> list(HttpSession session
             , @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if (Objects.isNull(user)){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录");
-        }
-        if (iUserService.checkAdminRole(user).isSuccess()){
             return iUserService.getAllUser(pageNum,pageSize);
-        }else {
-            return ServerResponse.createByError("无权限访问");
-        }
-
     }
 
 }

@@ -163,4 +163,8 @@
     from mmall_cart
     where user_id=#{userid} and checked = 1
   </select>
+
+  <select id="getCartTotal" resultType="int">
+    select count(1) from mmall_cart
+  </select>
 </mapper>

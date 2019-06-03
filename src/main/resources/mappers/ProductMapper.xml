@@ -211,4 +211,8 @@
         </foreach>
     </if>
   </select>
+
+  <select id="getProductTotal" resultType="int">
+    select count(1) from mmall_product
+  </select>
 </mapper>

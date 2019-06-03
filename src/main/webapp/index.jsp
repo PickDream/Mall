@@ -8,7 +8,7 @@
 
 <h2>MALL 服务已经启动</h2>
 <h2>----------Server1---------</h2>
-<h3>Version: 0.9</h3>
+<h3>Version: 1.5</h3>
 <h3>Date：190520</h3>
 
 <h3>上课的时候的任务</h3>
@@ -22,6 +22,10 @@
     <input type="file" name="upload_file">
     <input type="submit">
 </form>
-
+<form method="post" action="/manage/user/login.do">
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit">
+</form>
 </body>
 </html>

@@ -25,6 +25,7 @@ import com.mmall.vo.OrderItemVo;
 import com.mmall.vo.OrderProductVo;
 import com.mmall.vo.OrderVo;
 import com.mmall.vo.ShippingVo;
+import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -547,5 +548,12 @@ public class OrderServiceImpl implements IOrderService {
             }
         }
         return ServerResponse.createByError("订单不存在");
+    }
+
+    @Override
+    public void closeOrder(int hour) {
+        //当前时间减去Hour的时间
+        Date closeDateTime = DateUtils.addDays(new Date(),-hour);
+//        List<Order> orderList = orderMapper.
     }
 }

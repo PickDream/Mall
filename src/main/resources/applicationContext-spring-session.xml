@@ -13,7 +13,7 @@
         <property name="maxTotal" value="20"/>
     </bean>
     <bean id="defaultCookieSerializer" class="org.springframework.session.web.http.DefaultCookieSerializer">
-        <property name="domainName" value=".maomall.com"/>
+<!--        <property name="domainName" value=".maomall.com"/>-->
         <property name="useHttpOnlyCookie" value="true"/>
         <property name="cookiePath" value= "/"/>
     </bean>

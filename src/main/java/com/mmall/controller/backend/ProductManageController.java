@@ -42,44 +42,20 @@ public class ProductManageController {
     @ResponseBody
     @RequestMapping(value = "save.do")
     public ServerResponse productSave(HttpSession session, Product product){
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if (Objects.isNull(user)){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录");
-        }
-        if (iUserService.checkAdminRole(user).isSuccess()){
-            return iProductService.updateOrSaveProduct(product);
-        }else {
-            return ServerResponse.createByError("无权限访问");
-        }
+        return iProductService.updateOrSaveProduct(product);
     }
 
     //设置商品上下架状态
     @ResponseBody
     @RequestMapping(value = "set_sale_status.do")
     public ServerResponse setSaleStatus(HttpSession session, Integer productId,Integer status){
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if (Objects.isNull(user)){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录");
-        }
-        if (iUserService.checkAdminRole(user).isSuccess()){
-            return iProductService.changeProductStatus(productId,status);
-        }else {
-            return ServerResponse.createByError("无权限访问");
-        }
+        return iProductService.changeProductStatus(productId,status);
     }
 
     @ResponseBody
     @RequestMapping(value = "detail.do")
     public ServerResponse getDetail(HttpSession session,Integer productId){
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if (Objects.isNull(user)){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录");
-        }
-        if (iUserService.checkAdminRole(user).isSuccess()){
-            return iProductService.getProductDetail(productId);
-        }else {
-            return ServerResponse.createByError("无权限访问");
-        }
+        return iProductService.getProductDetail(productId);
     }
     //分页获取
     @ResponseBody
@@ -88,15 +64,7 @@ public class ProductManageController {
             , @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
 
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if (Objects.isNull(user)){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录");
-        }
-        if (iUserService.checkAdminRole(user).isSuccess()){
-            return iProductService.getProductList(pageNum,pageSize);
-        }else {
-            return ServerResponse.createByError("无权限访问");
-        }
+        return iProductService.getProductList(pageNum,pageSize);
     }
     @ResponseBody
     @RequestMapping(value = "search.do")
@@ -104,15 +72,7 @@ public class ProductManageController {
     public ServerResponse search(HttpSession session,String productName,Integer productId
             , @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if (Objects.isNull(user)){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录");
-        }
-        if (iUserService.checkAdminRole(user).isSuccess()) {
-            return iProductService.searchProduct(productName, productId, pageNum, pageSize);
-        }else {
-            return ServerResponse.createByError("无权限访问");
-        }
+        return iProductService.searchProduct(productName, productId, pageNum, pageSize);
     }
 
 
@@ -135,6 +95,11 @@ public class ProductManageController {
             return ServerResponse.createByError("无权限访问");
         }
     }
+
+    /**
+     * Simditor 前端插件
+     * 对返回值有格式要求
+     * */
     @RequestMapping("richtext_img_upload.do")
     @ResponseBody
     public Map richTextImgupload(@RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request, HttpSession session){

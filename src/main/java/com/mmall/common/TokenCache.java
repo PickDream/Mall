@@ -47,7 +47,6 @@ public class TokenCache {
         }
         return value;
     }
-    //TODO 设置缓存失效
     public static void invalidCache(String tokenKey){
         localCache.invalidate(tokenKey);
     }

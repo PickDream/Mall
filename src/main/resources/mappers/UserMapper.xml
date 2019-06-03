@@ -193,4 +193,8 @@
     <include refid="Base_Column_List"></include>
    from mmall_user
   </select>
+
+  <select id="getUserTotal" resultType="int">
+    select count(1) from mmall_user
+  </select>
 </mapper>

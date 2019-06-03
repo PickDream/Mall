@@ -32,4 +32,9 @@ public interface IOrderService {
     ServerResponse<PageInfo> manageSearch(Long orderNo, int pageNum, int pageSize);
 
     ServerResponse<String> manageSendGoods(Long orderNo);
+
+    //在制定的小时之后未关闭的订单将会被释放
+
+    void closeOrder(int hour);
+
 }

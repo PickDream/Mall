@@ -40,4 +40,6 @@ public interface UserMapper {
                                @Param("id")int id);
 
     List<User> selectAllUser();
+
+    int getUserTotal();
 }

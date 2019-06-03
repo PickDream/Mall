@@ -120,4 +120,8 @@
     select <include refid="Base_Column_List"/>
     from mmall_category where parent_id = #{parentId}
   </select>
+
+  <select id="getCategoryTotal" resultType="int">
+    select count(1) from mmall_category
+  </select>
 </mapper>
