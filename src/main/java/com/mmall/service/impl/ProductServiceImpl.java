@@ -140,8 +140,9 @@ public class ProductServiceImpl implements IProductService {
      * */
     @Override
     public ServerResponse<PageInfo> getProductByKeywordCategory(String keyword, Integer categoryId, int pageNum, int pageSize, String orderBy) {
+
         // keyword以及categoryId都为空的失衡报错
-        if (StringUtils.isBlank(keyword)&&keyword==null){
+        if (StringUtils.isBlank(keyword)&&categoryId==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.IllEGAL_ARGUMENT.getCode(),
                     ResponseCode.IllEGAL_ARGUMENT.getDesc());
         }
