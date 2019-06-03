@@ -11,7 +11,7 @@ import org.junit.Test;
 public class MD5Test {
     @Test
     public void test(){
-        String password = MD5Util.MD5EncodeUtf8("admin");
+        String password = MD5Util.MD5EncodeUtf8("maoxin");
         System.out.println(password);
     }
 }
