@@ -63,7 +63,6 @@ public class ProductManageController {
     public ServerResponse getList(HttpSession session
             , @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
-
         return iProductService.getProductList(pageNum,pageSize);
     }
     @ResponseBody

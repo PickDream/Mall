@@ -215,4 +215,12 @@
   <select id="getProductTotal" resultType="int">
     select count(1) from mmall_product
   </select>
+
+  <select id="selectStockByProductId" resultType="int" parameterType="integer">
+    select
+    stock
+    from mmall_product
+    where id=#{id}
+    for update
+  </select>
 </mapper>

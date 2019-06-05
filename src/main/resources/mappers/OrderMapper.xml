@@ -235,8 +235,13 @@
     <include refid="Base_Column_List"/>
    from mmall_order
    where status = #{status}
-   and create_time
-   <![CDATA[and create_time <= #{data}]]>
+   <![CDATA[and create_time <= #{date}]]>
     order by close_time desc
   </select>
+
+  <update id="closeOrderByOrderId" parameterType="integer">
+    update mmall_order
+    set status=0
+    where id = #{orderId}
+  </update>
 </mapper>

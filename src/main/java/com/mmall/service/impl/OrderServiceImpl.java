@@ -554,6 +554,23 @@ public class OrderServiceImpl implements IOrderService {
     public void closeOrder(int hour) {
         //当前时间减去Hour的时间
         Date closeDateTime = DateUtils.addDays(new Date(),-hour);
-//        List<Order> orderList = orderMapper.
+        List<Order> orderList = orderMapper.selectOrderStatusByCreateTime(Const.OrderStatusEnum.NOT_PAY.getCode(),DateTimeUtil.dateToStr(closeDateTime));
+        for (Order order:orderList){
+            //获取订单的购物车信息
+            List<OrderItem> orderItems = orderItemMapper.selectByOrderNo(order.getOrderNo());
+            //释放订单的库存数
+            for (OrderItem orderItem:orderItems){
+                Integer stock = productMapper.selectStockByProductId(orderItem.getProductId());
+                if (stock==null) continue;
+                Product product = new Product();
+                product.setId(orderItem.getId());
+                product.setStock(orderItem.getQuantity()+stock);
+                productMapper.updateByPrimaryKeySelective(product);
+            }
+            //关闭订单
+            orderMapper.closeOrderByOrderId(order.getId());
+            logger.info("关闭订单OrderNo:{}",order.getOrderNo());
+
+        }
     }
 }

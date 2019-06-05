@@ -26,4 +26,10 @@ public interface ProductMapper {
     List<Product> selectByNameAndCategoryIds(@Param("productName")String productName,@Param("categoryIdList")List<Integer> categoryIdList);
 
     int getProductTotal();
+
+    /**
+     * 传入商品ID注意是Integer类型，可以为null
+     * for update 使用悲观锁
+     */
+    Integer selectStockByProductId(Integer productId);
 }

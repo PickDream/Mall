@@ -29,7 +29,11 @@ public interface OrderMapper {
 
     int getOrderTotal();
 
-    //
+    /**
+     * 需要传入订单状态以及时间来确定带处理的订单
+     * */
     List<Order> selectOrderStatusByCreateTime(@Param("status") Integer status,@Param("date")String date);
+
+    int closeOrderByOrderId(Integer orderId);
 }
 
