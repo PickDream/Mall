@@ -18,7 +18,7 @@ import java.util.Objects;
 
 
 /**
- * @author Maoxin
+ * @author sly
  * @date 2/2/2019
  */
 @Controller
@@ -50,18 +50,49 @@ public class CategoryManageController {
     }
     @ResponseBody
     @RequestMapping("set_category_name.do")
-    public ServerResponse<String> modifyCategory(HttpSession session
-            ,@RequestParam(value = "categoryId",defaultValue = "0") Integer categrayId
+    public ServerResponse<String> updateCategoryName(HttpSession session
+            ,@RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId
             ,String categoryName){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (Objects.isNull(user)){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
         }
         if (user.getRole().intValue()==Const.Role.ROLE_ADMIN){
-            return iCategoryService.updateCategoryName(categrayId,categoryName);
+            return iCategoryService.updateCategoryName(categoryId,categoryName);
         }
         return ServerResponse.createByError("无权限操作，需要管理员权限");
     }
+
+    @ResponseBody
+    @RequestMapping("deprecate_category.do")
+    public ServerResponse<String> deprecateCategory(HttpSession session
+            ,@RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (Objects.isNull(user)){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
+        }
+        if (user.getRole().intValue()==Const.Role.ROLE_ADMIN){
+            return iCategoryService.deprecateCategory(categoryId);
+        }
+        return ServerResponse.createByError("无权限操作，需要管理员权限");
+    }
+
+    @ResponseBody
+    @RequestMapping("set_category_sortOrder.do")
+    public ServerResponse<String> setCategorySortOrder(HttpSession session
+            ,@RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId
+            ,Integer sortOrder){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (Objects.isNull(user)){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
+        }
+        if (user.getRole().intValue()==Const.Role.ROLE_ADMIN){
+            return iCategoryService.updateCategorySortOrder(categoryId,sortOrder);
+        }
+        return ServerResponse.createByError("无权限操作，需要管理员权限");
+    }
+
+
 
     /**
      * 注意，获取类别传入的是品类的父节点，对于根节点是0
@@ -81,6 +112,21 @@ public class CategoryManageController {
     }
 
     @ResponseBody
+    @RequestMapping("delete_Category.do")
+    public ServerResponse<String> deleteCategory(HttpSession session
+            , @RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
+
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (Objects.isNull(user)){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
+        }
+        if (user.getRole().intValue()==Const.Role.ROLE_ADMIN){
+            return iCategoryService.deleteCategory(categoryId);
+        }
+        return ServerResponse.createByError("无权限操作，需要管理员权限");
+    }
+
+    @ResponseBody
     @RequestMapping("get_deep_category.do")
     public ServerResponse getDeepCategory(HttpSession session
             ,@RequestParam(value = "categoryId",defaultValue = "100001")Integer categoryId){
@@ -93,4 +139,21 @@ public class CategoryManageController {
         }
         return ServerResponse.createByError("无权限操作，需要管理员权限");
     }
+
+    @ResponseBody
+    @RequestMapping("get_categoriesToOther.do")
+    public ServerResponse categoriesToOther(HttpSession session
+            ,@RequestParam(value = "categoryId",defaultValue = "100001")Integer categoryId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (Objects.isNull(user)){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录");
+        }
+        if (user.getRole().intValue()==Const.Role.ROLE_ADMIN){
+
+            return iCategoryService.categoriesToOther();
+        }
+        return ServerResponse.createByError("无权限操作，需要管理员权限");
+    }
+
+
 }

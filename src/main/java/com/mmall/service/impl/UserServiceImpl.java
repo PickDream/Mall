@@ -20,12 +20,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-/**
- * 用户Service实现
- * @author Maoxin
- * @ClassName UserServiceImpl
- * @date 1/28/2019
- */
 
 @Service("iUserService")
 public class UserServiceImpl implements IUserService {

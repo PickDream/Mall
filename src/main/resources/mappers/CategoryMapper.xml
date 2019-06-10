@@ -13,7 +13,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, parent_id, name, status, sort_order, create_time, update_time
+     id, parent_id, name, status, sort_order, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -113,7 +113,7 @@
       status = #{status,jdbcType=BIT},
       sort_order = #{sortOrder,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = now();
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectCategoryChildrenByParentId" parameterType="int" resultMap="BaseResultMap">
