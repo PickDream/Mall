@@ -7,10 +7,7 @@ import com.mmall.pojo.User;
 
 import javax.servlet.http.HttpSession;
 
-/**
- * @author Maoxin
- * @date 1/28/2019
- */
+
 public interface IUserService {
     ServerResponse<User> login(String username, String password);
 

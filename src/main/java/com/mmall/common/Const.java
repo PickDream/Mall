@@ -1,7 +1,6 @@
 package com.mmall.common;
 
 import com.google.common.collect.Sets;
-import com.mmall.pojo.Product;
 
 import java.util.Set;
 
