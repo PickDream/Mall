@@ -18,7 +18,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <org.springfreamework.version>4.0.0.RELEASE</org.springfreamework.version>
+    <org.springfreamework.version>5.2.20.RELEASE</org.springfreamework.version>
     <org.mybatis.version>3.4.1</org.mybatis.version>
     <org.mybatis.spring.version>1.3.0</org.mybatis.spring.version>
   </properties>
